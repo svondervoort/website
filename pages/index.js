@@ -1,4 +1,3 @@
-import {GRAPH_TOKEN, GRAPH_URL} from '../lib/constants';
 import { loadData } from '../lib/load-data';
 
 import Head from 'next/head';
