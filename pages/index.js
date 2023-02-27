@@ -16,13 +16,13 @@ function Home({educationCollection, experienceCollection, skillsCollection}) {
             </Head>
             <main>
                 <div className="container mx-auto prose lg:prose-xl px-8 py-8 md:px-0 md:py-16">
-                    <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16'}>
+                    <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16 py-0 md:py-0'}>
                         <h2 className={'text-primary'}>Skills</h2>
                         {skillsCollection.map((item) => (
                             <SkillCategory key="{item.sys.id}" item={item}></SkillCategory>
                         ))}
                     </div>
-                    <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16'}>
+                    <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16 pt-0 md:pt-0'}>
                         <h2 className={'text-primary'}>Work experience</h2>
                         <div className={''}>
                             {experienceCollection.map((item) => (
@@ -30,7 +30,7 @@ function Home({educationCollection, experienceCollection, skillsCollection}) {
                             ))}
                         </div>
                     </div>
-                    <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16'}>
+                    <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16 pt-0 md:pt-0'}>
                         <h2 className={'text-primary'}>Education</h2>
                         <div className={''}>
                             {educationCollection.map((item) => (
