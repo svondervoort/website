@@ -3,7 +3,7 @@ export default function Experience({item}) {
 
     return (
         <div className="py-4 border-b border-dashed border-primary group-hover:opacity-50 hover:!opacity-100 group">
-            <strong className="block text-2xl text-primary mb-2">{item.name}</strong>
+            <strong className="block text-2xl text-primary mb-2">{item.title}</strong>
             <div className={'flex justify-between items-center'}>
                 <span className={'text-sm text-primary border border-solid border-primary rounded inline-block px-2 mr-8'}>{item.type}</span>
                 <div>
