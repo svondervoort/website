@@ -1,10 +1,10 @@
 import {GRAPH_TOKEN, GRAPH_URL} from '../lib/constants';
+import { loadData } from '../lib/load-data';
 
 import Head from 'next/head';
 import SkillCategory from "../components/skill-category";
 import Experience from "../components/experience";
 import Education from "../components/education";
-
 
 function Home({educationCollection, experienceCollection, skillsCollection}) {
     return (
@@ -19,14 +19,14 @@ function Home({educationCollection, experienceCollection, skillsCollection}) {
                     <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16'}>
                         <h2 className={'text-primary'}>Skills</h2>
                         {skillsCollection.map((item) => (
-                            <SkillCategory key="{item}" item={item}></SkillCategory>
+                            <SkillCategory key="{item.sys.id}" item={item}></SkillCategory>
                         ))}
                     </div>
                     <div className={'border border-solid border-primary p-8 my-8 md:p-16 md:my-16'}>
                         <h2 className={'text-primary'}>Work experience</h2>
                         <div className={''}>
                             {experienceCollection.map((item) => (
-                                <Experience key="{item}" item={item}></Experience>
+                                <Experience key="{item.sys.id}" item={item}></Experience>
                             ))}
                         </div>
                     </div>
@@ -34,7 +34,7 @@ function Home({educationCollection, experienceCollection, skillsCollection}) {
                         <h2 className={'text-primary'}>Education</h2>
                         <div className={''}>
                             {educationCollection.map((item) => (
-                                <Education key="{item}" item={item}></Education>
+                                <Education key="{item.sys.id}" item={item}></Education>
                             ))}
                         </div>
                     </div>
@@ -45,74 +45,21 @@ function Home({educationCollection, experienceCollection, skillsCollection}) {
 }
 
 export async function getStaticProps(context) {
-    try {
-        const headers = {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${GRAPH_TOKEN}`
-        };
-        const requestBody = {
-            query: `query {
-              skillCategoryCollection(limit: 20) {
-                items {
-                  title,
-                  skillCollection(limit: 20) {
-                    items {
-                        title,
-                        rating
-                    }
-                  }
-                }
-              }
-              educationCollection(limit: 20) {
-                  items {
-                      title,
-                      location,
-                      from,
-                      till,
-                      level,
-                      description
-                  }
-              }
-              experienceCollection(limit: 20) {
-                  items {
-                      title,
-                      type,
-                      location,
-                      from,
-                      till,
-                      description,
-                      clientsCollection(limit: 20) {
-                          items {
-                              title
-                          }
-                      }
-                  }
-              }
-            }`
-        };
+    // Instead of fetching your `/api` route you can call the same
+    // function directly in `getStaticProps`
+    const data = await loadData();
 
-        const options = {
-            method: 'POST',
-            headers,
-            body: JSON.stringify(requestBody)
-        };
+    // Props returned will be passed to the page component
+    const educationCollection = data.educationCollection?.items;
+    const experienceCollection = data.experienceCollection?.items;
+    const skillsCollection = data.skillCategoryCollection?.items;
 
-        const response = await (await fetch(GRAPH_URL, options)).json();
-        console.log('RESPONSE FROM FETCH REQUEST', response?.data);
-
-        const educationCollection = response?.data.educationCollection?.items;
-        const experienceCollection = response?.data.experienceCollection?.items;
-        const skillsCollection = response?.data.skillCategoryCollection?.items;
-
-        return {
-            props: {
-                educationCollection,
-                experienceCollection,
-                skillsCollection
-            }
+    return {
+        props: {
+            educationCollection,
+            experienceCollection,
+            skillsCollection
         }
-    } catch (err) {
-        console.log('ERROR DURING FETCH REQUEST', err);
     }
 }
 

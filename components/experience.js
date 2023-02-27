@@ -8,7 +8,7 @@ export default function Experience({item}) {
                 <span className={'text-sm text-primary border border-solid border-primary rounded inline-block px-2 mr-8'}>{item.type}</span>
                 <div>
                     <span className={'text-sm text-primary'}>{item.location}</span>
-                    <span className={'text-sm text-primary ml-8'}>{ formatDate(item.dateFrom, dateOptions) } - { formatDate(item.dateFrom, dateOptions) }</span>
+                    <span className={'text-sm text-primary ml-8'}>{ formatDate(item.from, dateOptions) } - { formatDate(item.till, dateOptions) }</span>
                 </div>
             </div>
             {'' != item.description && <div className={'text-sm mt-2 border-t border-dashed border-primary pt-4 hidden group-hover:block'}>{item.description}</div>}        </div>
