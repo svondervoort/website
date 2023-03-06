@@ -8,29 +8,15 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      'primary': '#0fa76a',
-      'secondary': '#252a05',
+      'primary': '#DCA7A7',
+      'black': '#111214',
+      'grey': '#888889',
+      'white': '#FFFFFF',
     },
-    extend: {
-      fontFamily: {
-        'sans': ['Fira Mono', 'monospace'],
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            color: '#0fa76a',
-            a: {
-              color: '#0fa76a',
-              '&:hover': {
-                color: '#0fa76a',
-              },
-            },
-          },
-        },
-      },
+    fontFamily: {
+      'display': ['Major Mono Display', 'monospace'],
+      'mono': ['JetBrains Mono', 'monospace'],
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 };
