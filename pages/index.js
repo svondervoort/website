@@ -11,7 +11,7 @@ function Home({timelineCollection}) {
                     <h1 className={`font-display aspect-square text-9xl mx-auto text-primary border-8 border-solid border-primary p-8 inline-block`}>SAN<br/>DER<br/>SOM</h1>
                 </div>
 
-                <div className="container mx-auto max-w-4xl p-8 md:p-16">
+                <div className="container mx-auto max-w-4xl p-8 md:p-16 pb-4 md:pb-8">
                     {timelineCollection.map((item) => (
                         <Timeline key="{item.sys.id}" item={item}></Timeline>
                     ))}
