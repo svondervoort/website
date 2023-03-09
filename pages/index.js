@@ -1,37 +1,99 @@
-import { loadData } from '../lib/load-data';
+import { loadData } from "../lib/load-data";
 
-import Head from 'next/head';
+import Head from "next/head";
 import Timeline from "../components/timeline";
 
-function Home({timelineCollection}) {
-    return (
-        <div className={'bg-secondary'}>
-            <main>
-                <div className={`h-screen w-screen flex items-center justify-center`}>
-                    <h1 className={`font-display aspect-square text-9xl mx-auto text-primary border-8 border-solid border-primary p-8 inline-block`}>SAN<br/>DER<br/>SOM</h1>
-                </div>
-
-                <div className="container mx-auto max-w-4xl p-8 md:p-16 pb-4 md:pb-8">
-                    {timelineCollection.map((item) => (
-                        <Timeline key="{item.sys.id}" item={item}></Timeline>
-                    ))}
-                </div>
-            </main>
+function Home({ timelineCollection }) {
+  return (
+    <div className={"bg-secondary"}>
+      <main>
+        <div className={`flex h-screen w-screen items-center justify-center`}>
+          <h1
+            className={`mx-auto inline-block aspect-square border-solid border-primary p-8 font-display text-9xl text-primary md:border-8`}
+          >
+            SAN
+            <br />
+            DER
+            <br />
+            SOM
+          </h1>
         </div>
-    );
+
+        <div className="container mx-auto max-w-4xl p-16 pb-0 md:p-16 md:pb-0">
+          {timelineCollection.map((item, i, timelineCollection) => (
+            <Timeline
+              key="{item.sys.id}"
+              item={item}
+              last={i + 1 === timelineCollection.length}
+            ></Timeline>
+          ))}
+        </div>
+
+        <div className="relative z-50 bg-primary p-8 md:p-16">
+          <div className="container mx-auto max-w-4xl text-center text-xs text-black">
+            Made with ❤️ by{" "}
+            <a
+              className={"underline"}
+              href={"https://github.com/svondervoort"}
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              svondervoort
+            </a>{" "}
+            using 🧰{" "}
+            <a
+              className={"underline"}
+              href={"https://tailwindcss.com"}
+              target={"_blank"}
+            >
+              TailwindCSS
+            </a>
+            ,{" "}
+            <a
+              className={"underline"}
+              href={"https://nextjs.org"}
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              Next.js
+            </a>{" "}
+            and{" "}
+            <a
+              className={"underline"}
+              href={"https://contentful.com"}
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              Contentful
+            </a>{" "}
+            and 🌍 hosted on{" "}
+            <a
+              className={"underline"}
+              href={"https://vercel.com"}
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              Vercel
+            </a>
+            .
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
 
 export async function getStaticProps(context) {
-    const data = await loadData();
+  const data = await loadData();
 
-    // Props returned will be passed to the page component
-    const timelineCollection = data.timelineCollection?.items;
+  // Props returned will be passed to the page component
+  const timelineCollection = data.timelineCollection?.items;
 
-    return {
-        props: {
-            timelineCollection
-        }
-    }
+  return {
+    props: {
+      timelineCollection,
+    },
+  };
 }
 
 export default Home;
