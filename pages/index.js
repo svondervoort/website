@@ -9,7 +9,7 @@ function Home({ timelineCollection }) {
       <main>
         <div className={`flex h-screen w-screen items-center justify-center`}>
           <h1
-            className={`mx-auto inline-block aspect-square border-solid border-primary p-8 font-display text-9xl text-primary md:border-8`}
+            className={`mx-auto inline-block aspect-square border-solid border-primary p-8 font-display text-8xl text-primary md:border-8 md:text-9xl`}
           >
             SAN
             <br />
