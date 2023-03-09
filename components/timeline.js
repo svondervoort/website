@@ -3,8 +3,8 @@ export default function Timeline({ item, last }) {
 
   return (
     <div
-      className={`relative pl-16 before:absolute before:bottom-0 before:top-0 before:left-4 before:w-0.5 before:bg-primary ${
-        last ? "pb-40" : "pb-8"
+      className={`relative pl-16 text-sm before:absolute before:bottom-0 before:top-0 before:left-4 before:w-0.5 before:bg-primary md:text-base ${
+        last ? "pb-40" : "pb-12"
       }`}
     >
       <div
@@ -12,11 +12,13 @@ export default function Timeline({ item, last }) {
           !simpleView.includes(item.type) ? "border-solid" : "border-dashed"
         } align-center flex justify-center border-primary bg-black`}
       ></div>
-      <div className={`flex items-center justify-between font-mono`}>
+      <div
+        className={`flex flex-col items-start justify-between font-mono md:flex-row md:items-center`}
+      >
         <h2
           className={`leading-8 ${
             !simpleView.includes(item.type)
-              ? "text-3xl text-white"
+              ? "mb-2 text-xl text-white md:mb-0 md:text-3xl"
               : "text-grey"
           }`}
         >
@@ -52,7 +54,7 @@ export default function Timeline({ item, last }) {
       )}
 
       {item.rating != null && (
-        <div className="mt-4 w-full rounded-full border border-solid border-grey">
+        <div className="mt-2 w-full rounded-full border border-solid border-grey md:mt-4">
           <div
             className="h-2.5 rounded-full bg-grey"
             style={{ width: item.rating + "%" }}
