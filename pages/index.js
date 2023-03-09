@@ -45,6 +45,7 @@ function Home({ timelineCollection }) {
               className={"underline"}
               href={"https://tailwindcss.com"}
               target={"_blank"}
+              rel="noreferrer"
             >
               TailwindCSS
             </a>
