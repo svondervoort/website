@@ -47,6 +47,7 @@ export default function Timeline({ item, last }) {
           {item.badges != null &&
             item.badges.map((badge, i) => (
               <span
+                key={`badge${i}`}
                 className={`inline-block rounded border border-solid px-2 py-1 font-mono text-sm  ${
                   i === 0 ? "border-white text-white" : "border-grey text-grey"
                 }`}

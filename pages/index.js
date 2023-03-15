@@ -74,7 +74,7 @@ function Home({ timelineCollection }) {
           {showFilters && (
             <ul className={`px-8 py-4`}>
               {filters.map(({ name }, i) => (
-                <li key={i} className={`my-4`}>
+                <li key={`custom-checkbox-${i}`} className={`my-4`}>
                   <input
                     type="checkbox"
                     id={`custom-checkbox-${i}`}
@@ -82,7 +82,6 @@ function Home({ timelineCollection }) {
                     value={name}
                     checked={checkedState[i]}
                     onChange={() => handleOnChange(i)}
-                    // className={`mr-2 accent-primary`}
                     className={`mr-2 h-4 w-8 cursor-pointer appearance-none rounded bg-grey before:pointer-events-none before:absolute before:m-1 before:h-2 before:w-3 before:rounded before:bg-black before:transition-[margin] before:ease-in-out checked:bg-primary checked:before:ml-4`}
                   />
                   <label
