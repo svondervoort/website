@@ -34,11 +34,10 @@ export default function Timeline({ item, last }) {
             <span className={`px-4 py-2 text-primary`}>
               {formatDate(item.from)}
             </span>
-            {item.till != null && (
-              <span className={`bg-primary px-4 py-2 text-black`}>
-                {formatDate(item.till)}
-              </span>
-            )}
+
+            <span className={`bg-primary px-4 py-2 text-black`}>
+              {item.till != null ? formatDate(item.till) : "Today"}
+            </span>
           </div>
         )}
       </div>
