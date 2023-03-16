@@ -30,7 +30,7 @@ function Home({ timelineCollection }) {
     const newActiveFilters = [];
 
     updatedCheckedState.forEach((el, i) => {
-      if (el == true) {
+      if (el === true) {
         newActiveFilters.push(filters[i].type);
       }
     });
@@ -39,12 +39,10 @@ function Home({ timelineCollection }) {
   };
 
   return (
-    <div className={"bg-secondary"}>
+    <div className="bg-secondary">
       <main>
-        <div className={`flex h-screen w-screen items-center justify-center`}>
-          <h1
-            className={`mx-auto inline-block aspect-square border-solid border-primary p-8 font-display text-8xl text-primary md:border-8 md:text-9xl`}
-          >
+        <div className="flex h-screen w-screen items-center justify-center">
+          <h1 className="mx-auto inline-block aspect-square border-solid border-primary p-8 font-display text-8xl text-primary md:border-8 md:text-9xl">
             SAN
             <br />
             DER
@@ -72,7 +70,7 @@ function Home({ timelineCollection }) {
           }`}
         >
           {showFilters && (
-            <ul className={`px-8 py-4`}>
+            <ul className="px-8 py-4">
               {filters.map(({ name }, i) => (
                 <li key={`custom-checkbox-${i}`} className={`my-4`}>
                   <input
@@ -82,10 +80,10 @@ function Home({ timelineCollection }) {
                     value={name}
                     checked={checkedState[i]}
                     onChange={() => handleOnChange(i)}
-                    className={`mr-2 h-4 w-8 cursor-pointer appearance-none rounded bg-grey before:pointer-events-none before:absolute before:m-1 before:h-2 before:w-3 before:rounded before:bg-black before:transition-[margin] before:ease-in-out checked:bg-primary checked:before:ml-4`}
+                    className="mr-2 h-4 w-8 cursor-pointer appearance-none rounded bg-grey before:pointer-events-none before:absolute before:m-1 before:h-2 before:w-3 before:rounded before:bg-black before:transition-[margin] before:ease-in-out checked:bg-primary checked:before:ml-4"
                   />
                   <label
-                    className={`cursor-pointer text-white`}
+                    className="cursor-pointer text-white"
                     htmlFor={`custom-checkbox-${i}`}
                   >
                     {name}
@@ -97,7 +95,7 @@ function Home({ timelineCollection }) {
 
           <button
             onClick={toggleFilters}
-            className={` group flex h-16 w-16 items-center justify-center`}
+            className="group flex h-16 w-16 items-center justify-center"
           >
             <FontAwesomeIcon
               icon={showFilters ? faTimes : faCog}
