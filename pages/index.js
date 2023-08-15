@@ -93,7 +93,7 @@ function Home({ timelineCollection }) {
       <div className="relative container mx-auto md:max-w-3xl py-8 lg:py-16 pl-16 lg:pl-24 before:absolute before:bottom-0 before:top-0 before:left-4 before:w-0.5 before:bg-white/50">
         <div className="aspect-square border-solid border-white border-opacity-50 lg:p-8 lg:border-4 flex items-center">
           <div>
-          <h1 className="font-display leading-none text-9xl">
+          <h1 className="font-display leading-none text-8xl lg:text-9xl">
             SAN
             <br />
             DER
