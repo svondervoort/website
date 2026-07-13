@@ -100,10 +100,22 @@ container that draws the vertical line. The canvas breaks out to full-bleed from
 it:
 
 ```
-absolute left-1/2 -translate-x-1/2 w-screen h-screen
+absolute left-1/2 -translate-x-1/2 w-screen h-full
 ```
 
-and sits below the line in z-order. Because the container's `before:` line already spans
+on a wrapper that cancels the container's left padding and fills the visible screen:
+
+```
+relative -ml-16 h-[calc(100vh-8rem)] lg:-ml-24 lg:h-[calc(100vh-12rem)]
+```
+
+The negative margin matters: the canvas's containing block is the wrapper, so without it
+`left-1/2` centres on the container's *padded* box and the wordmark lands half the padding
+right of true centre. The height is the viewport minus the page's top offset (`main`'s
+`pt-24 lg:pt-32` plus the container's `py-8 lg:py-16`), so the hero fills exactly the
+visible screen instead of running past the fold.
+
+The canvas sits below the line in z-order. Because the container's `before:` line already spans
 `top-0` to `bottom-0`, extending the container upward with the hero means one continuous
 line runs from the top of the 100vh hero, past the intro copy, into the timeline. No
 separate line element is needed.

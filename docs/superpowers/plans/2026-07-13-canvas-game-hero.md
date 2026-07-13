@@ -244,7 +244,7 @@ export default function Game() {
   }, []);
 
   return (
-    <div className="relative h-screen">
+    <div className="relative -ml-16 h-[calc(100vh-8rem)] lg:-ml-24 lg:h-[calc(100vh-12rem)]">
       <canvas
         ref={canvasRef}
         className="game-canvas absolute left-1/2 top-0 h-full w-screen -translate-x-1/2"
@@ -253,6 +253,15 @@ export default function Game() {
   );
 }
 ```
+
+The wrapper's negative left margin cancels the container's `pl-16 lg:pl-24`. Without it the
+canvas's containing block is the *padded* box, so `left-1/2` centres the canvas on that box
+rather than on the viewport — the wordmark ends up half the padding (48px at `lg`) right of
+centre and the canvas overhangs the right edge.
+
+The height is the viewport minus the page's top offset (`main`'s `pt-24 lg:pt-32` plus the
+container's `py-8 lg:py-16` — 8rem, and 12rem at `lg`), so the hero fills exactly the visible
+screen. A literal `h-screen` would start 192px down and run past the fold.
 
 - [ ] **Step 6: Load the Bytesized font in `pages/_document.js`**
 
@@ -447,7 +456,7 @@ Declare `score` and `enemies` beside `letters`:
   let score = 0;
 ```
 
-And extend the loop — enemies are drawn *behind* the text, matching the landing's draw order:
+And extend the loop — enemies are drawn *over* the text, matching the landing's draw order:
 
 ```js
   const loop = (time) => {
