@@ -44,7 +44,7 @@ lib/game/helpers.js         getRandomInt, getRandomNonZeroFloat   (unchanged)
 lib/game/canvas.js          resize / buffer sizing
 lib/game/text.js            wavy letters      — canvas passed in
 lib/game/enemies.js         drifting squares  — canvas passed in
-lib/game/mouseParticles.js  click burst       — canvas passed in
+lib/game/mouse-particles.js click burst       — canvas passed in
 lib/game/cursor.js          drawn ring cursor
 lib/game/index.js           createGame(canvas) => { destroy() }
 components/game.js          React wrapper: <canvas ref> + useEffect(createGame)
