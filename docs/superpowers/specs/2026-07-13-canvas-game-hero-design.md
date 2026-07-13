@@ -106,8 +106,14 @@ absolute left-1/2 -translate-x-1/2 w-screen h-full
 on a wrapper that cancels the container's left padding and fills the visible screen:
 
 ```
-relative -ml-16 h-[calc(100vh-8rem)] lg:-ml-24 lg:h-[calc(100vh-12rem)]
+game-hero relative -ml-16 lg:-ml-24
 ```
+
+where `.game-hero` in `styles/globals.css` sets `height: calc(100vh - 8rem)` followed by
+`height: calc(100dvh - 8rem)` (12rem at `lg`). The `dvh` unit matters on mobile: `100vh` is the
+*large* viewport, measured with the URL bar hidden, so a `vh`-only hero is taller than the visible
+screen while the bar is showing. The duplicate `vh` declaration is the fallback for browsers
+without `dvh`.
 
 The negative margin matters: the canvas's containing block is the wrapper, so without it
 `left-1/2` centres on the container's *padded* box and the wordmark lands half the padding
@@ -129,7 +135,12 @@ horizontal scrollbar.
 
 - Canvas background stays transparent; the page's green gradient shows through.
 - Letters render in Bytesized. Add it to the Google Fonts `<link>` in `pages/_document.js`.
-  Gate the first paint on `document.fonts.ready` so letters do not flash in a fallback face.
+  Gate the first paint on `document.fonts.load('96px "Bytesized"')` — **not** `document.fonts.ready`.
+  Nothing in the DOM uses this family (only `ctx.font` does), so the `@font-face` is never added
+  to the loading set and `.ready` resolves without waiting for it. `.load()` requests the face
+  explicitly. Start the game on both fulfil and reject, so a font failure degrades to a fallback
+  face rather than a blank hero.
+- `Major Mono Display` is dropped: the `<h1>` it styled is now `sr-only` and nothing else uses it.
 - Enemies keep `#fc814a`. Letter palette keeps the landing's five colours.
 - The landing's text reads `SANDEROM` (missing an S). Use `SANDERSOM`.
 
@@ -137,8 +148,11 @@ horizontal scrollbar.
 
 - Tapping an enemy pops it and scores, same as a click.
 - The drawn ring cursor is only rendered when a real pointer is present (a `mousemove`
-  has been seen); on touch it is skipped. `cursor: none` applies only to the canvas, and
-  only on fine pointers.
+  has been seen); on touch it is skipped. `cursor: none` applies only to the canvas, only on
+  fine pointers, and only while the game is actually running — `createGame` adds an
+  `is-playing` class and `destroy()` removes it. Static CSS would hide the native cursor even
+  when the bundle fails to load or `createGame` throws, leaving the hero with no cursor and no
+  drawn substitute.
 - No handler calls `preventDefault`, so a vertical drag still scrolls the page.
 
 ## Out of scope
@@ -146,3 +160,8 @@ horizontal scrollbar.
 - Pausing the rAF loop when the hero scrolls out of view. Cheap to add later; not required.
 - Persisting or displaying a high score.
 - Any change to the timeline, filters, or Contentful data loading.
+- `prefers-reduced-motion`: the hero animates perpetually. Worth revisiting — a reduced-motion
+  visitor gets no way to stop it.
+- Device-pixel-ratio awareness: the drawing buffer is sized in CSS pixels, so the hero is
+  upscaled on retina. This matches the original and reads as deliberate pixel art, but
+  `toCanvasCoords` is already DPR-correct if it is ever worth sharpening.
