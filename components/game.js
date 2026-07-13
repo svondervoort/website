@@ -29,7 +29,7 @@ export default function Game() {
   }, []);
 
   return (
-    <div className="relative h-screen">
+    <div className="relative -ml-16 h-[calc(100vh-8rem)] lg:-ml-24 lg:h-[calc(100vh-12rem)]">
       <canvas
         ref={canvasRef}
         className="game-canvas absolute left-1/2 top-0 h-full w-screen -translate-x-1/2"
