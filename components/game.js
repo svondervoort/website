@@ -17,7 +17,7 @@ export default function Game() {
     };
 
     if (document.fonts) {
-      document.fonts.ready.then(start);
+      document.fonts.load('96px "Bytesized"').then(start, start);
     } else {
       start();
     }
@@ -29,7 +29,7 @@ export default function Game() {
   }, []);
 
   return (
-    <div className="relative -ml-16 h-[calc(100vh-8rem)] lg:-ml-24 lg:h-[calc(100vh-12rem)]">
+    <div className="game-hero relative -ml-16 lg:-ml-24">
       <canvas
         ref={canvasRef}
         className="game-canvas absolute left-1/2 top-0 h-full w-screen -translate-x-1/2"

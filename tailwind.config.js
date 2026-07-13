@@ -13,7 +13,6 @@ module.exports = {
       white: "#FFFFFF",
     },
     fontFamily: {
-      display: ["Major Mono Display", "monospace"],
       mono: ["JetBrains Mono", "monospace"],
     },
     borderWidth: {
