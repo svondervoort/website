@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-function Home({ timelineCollection }) {
+function Home({ timelineCollection, yearsOfExperience }) {
   const [checkedState, setCheckedState] = React.useState(
     new Array(filters.length).fill(true)
   );
@@ -102,6 +102,36 @@ function Home({ timelineCollection }) {
           </h1>
           </div>
         </div>
+
+        <div className="mt-12 font-mono text-sm text-white md:text-base lg:mt-16">
+          <p>
+            Ik ben Sander van de Vondervoort — Frontend Developer, vader van 2
+            en gamer.
+          </p>
+
+          <p className="mt-4">
+            Al {yearsOfExperience} jaar vertaal ik designs naar werkende,
+            onderhoudbare frontends: van component-architectuur en
+            Twig-templates tot CSS en JavaScript, meestal binnen Craft CMS.
+          </p>
+
+          <p className="mt-4">
+            Ik hou van structuur en consistentie — vandaar mijn voorliefde voor
+            design systems, herbruikbare componenten en heldere conventies. Ik
+            werk goed zelfstandig, maar voel me net zo thuis in een team: een
+            sociaal persoon en makkelijk in de omgang.
+          </p>
+
+          <p className="mt-4">
+            Benieuwd wat ik voor je kan betekenen?{` `}
+            <a
+              href="mailto:hello@svondervoort.nl"
+              className="underline hover:no-underline"
+            >
+              hello@svondervoort.nl
+            </a>
+          </p>
+        </div>
       </div>
 
       <div className="container mx-auto max-w-3xl">
@@ -127,8 +157,29 @@ export async function getStaticProps() {
   return {
     props: {
       timelineCollection,
+      yearsOfExperience: yearsSinceFirstExperience(timelineCollection),
     },
   };
+}
+
+function yearsSinceFirstExperience(timelineCollection) {
+  const startDates = timelineCollection
+    .filter(({ type, from }) => type === `Experience` && from != null)
+    .map(({ from }) => new Date(from));
+
+  const start = new Date(Math.min(...startDates));
+  const now = new Date();
+
+  let years = now.getFullYear() - start.getFullYear();
+
+  if (
+    now.getMonth() < start.getMonth() ||
+    (now.getMonth() === start.getMonth() && now.getDate() < start.getDate())
+  ) {
+    years--;
+  }
+
+  return years;
 }
 
 export default Home;
