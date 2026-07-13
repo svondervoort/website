@@ -155,9 +155,23 @@ horizontal scrollbar.
   drawn substitute.
 - No handler calls `preventDefault`, so a vertical drag still scrolls the page.
 
+## Pausing when off-screen
+
+An `IntersectionObserver` on the canvas cancels the rAF loop when the hero scrolls out of view
+and restarts it when it returns, so the game does not burn frames while the visitor is reading
+the timeline. Browsers already suspend rAF in hidden tabs, so that case needs no code.
+
+Hover-gating (pause unless the pointer is over the canvas) was considered and rejected: touch
+devices have no hover state, so the game would sit frozen on the one platform where tapping an
+enemy is the entire interaction.
+
+The wave animates on accumulated elapsed time rather than the raw rAF timestamp. Using the raw
+timestamp would make the wave snap to a new phase on resume, because the clock keeps running
+while the loop is stopped. The cursor's grow deadline stays on the raw clock, since it is set
+from `performance.now()`.
+
 ## Out of scope
 
-- Pausing the rAF loop when the hero scrolls out of view. Cheap to add later; not required.
 - Persisting or displaying a high score.
 - Any change to the timeline, filters, or Contentful data loading.
 - `prefers-reduced-motion`: the hero animates perpetually. Worth revisiting — a reduced-motion
