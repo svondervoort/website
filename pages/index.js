@@ -1,6 +1,7 @@
 import { loadData } from "../lib/load-data";
 import Timeline from "../components/timeline";
 import { filters } from "../lib/filters";
+import Game from "../components/game";
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -90,18 +91,10 @@ function Home({ timelineCollection, yearsOfExperience }) {
           </button>
         </div>
       </div>
-      <div className="relative container mx-auto md:max-w-3xl py-8 lg:py-16 pl-16 lg:pl-24 before:absolute before:bottom-0 before:top-0 before:left-4 before:w-0.5 before:bg-white/50">
-        <div className="aspect-square border-solid border-white border-opacity-50 lg:p-8 lg:border-4 flex items-center">
-          <div>
-          <h1 className="font-display leading-none text-8xl lg:text-9xl">
-            SAN
-            <br />
-            DER
-            <br />
-            SOM
-          </h1>
-          </div>
-        </div>
+      <div className="relative container mx-auto md:max-w-3xl py-8 lg:py-16 pl-16 lg:pl-24 before:absolute before:bottom-0 before:top-0 before:left-4 before:z-10 before:w-0.5 before:bg-white/50 before:pointer-events-none">
+        <h1 className="sr-only">SANDERSOM</h1>
+
+        <Game />
 
         <div className="mt-12 font-mono text-sm text-white md:text-base lg:mt-16">
           <p>

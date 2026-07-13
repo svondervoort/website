@@ -1,0 +1,9 @@
+body {
+  overflow-x: hidden;
+}
+
+@media (pointer: fine) {
+  .game-canvas {
+    cursor: none;
+  }
+}
