@@ -1,13 +1,14 @@
 import { loadData } from "../lib/load-data";
 import Timeline from "../components/timeline";
 import { filters } from "../lib/filters";
+import Game from "../components/game";
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-function Home({ timelineCollection, yearsOfExperience }) {
+function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
   const [checkedState, setCheckedState] = React.useState(
     new Array(filters.length).fill(true)
   );
@@ -66,8 +67,10 @@ function Home({ timelineCollection, yearsOfExperience }) {
                         value={name}
                         checked={checkedState[i]}
                         onChange={() => handleOnChange(i)}
-                        className={`appearance-none absolute top-2/4 lg:top-auto lg:bottom-0 left-6 lg:left-2/4 -translate-y-2/4 lg:-translate-y-0 lg:-translate-x-2/4 w-[14px] h-1 bg-white ${
-                          checkedState[i] ? "shadow-switch shadow-white" : ""
+                        className={`appearance-none absolute top-2/4 lg:top-auto lg:bottom-0 left-6 lg:left-2/4 -translate-y-2/4 lg:-translate-y-0 lg:-translate-x-2/4 w-[14px] h-1 ${
+                          checkedState[i]
+                            ? "bg-accent shadow-switch shadow-accent"
+                            : "bg-white"
                         }`}
                     />
                     <label className="block cursor-pointer leading-4 pl-16 lg:pl-8 pr-8 py-6 hover:bg-white/10" htmlFor={`custom-checkbox-${i}`}
@@ -90,40 +93,37 @@ function Home({ timelineCollection, yearsOfExperience }) {
           </button>
         </div>
       </div>
-      <div className="relative container mx-auto md:max-w-3xl py-8 lg:py-16 pl-16 lg:pl-24 before:absolute before:bottom-0 before:top-0 before:left-4 before:w-0.5 before:bg-white/50">
-        <div className="aspect-square border-solid border-white border-opacity-50 lg:p-8 lg:border-4 flex items-center">
-          <div>
-          <h1 className="font-display leading-none text-8xl lg:text-9xl">
-            SAN
-            <br />
-            DER
-            <br />
-            SOM
-          </h1>
-          </div>
-        </div>
+      <div className="relative container mx-auto md:max-w-3xl py-8 lg:py-16 pl-16 lg:pl-24">
+        <h1 className="sr-only">Sander van de Vondervoort</h1>
+
+        {/* The timeline line stops at the game and picks up again below it, so it
+            never crosses the card. */}
+        <div className="absolute left-4 top-0 h-8 w-0.5 bg-white/50 lg:h-16" />
+        <div className="timeline-line--below-hero absolute bottom-0 left-4 w-0.5 bg-white/50" />
+
+        <Game />
 
         <div className="mt-12 font-mono text-sm text-white md:text-base lg:mt-16">
           <p>
-            Ik ben Sander van de Vondervoort — Frontend Developer, vader van 2
-            en gamer.
+            I&apos;m Sander van de Vondervoort. {yearsOld} years old, Frontend
+            Developer, married 💍, father of 2 👧👦 and a gamer 👾.
           </p>
 
           <p className="mt-4">
-            Al {yearsOfExperience} jaar vertaal ik designs naar werkende,
-            onderhoudbare frontends: van component-architectuur en
-            Twig-templates tot CSS en JavaScript, meestal binnen Craft CMS.
+            For {yearsOfExperience} years I&apos;ve been turning designs into
+            working, maintainable frontends: from component architecture and Twig
+            templates to CSS and JavaScript, mostly within Craft CMS.
           </p>
 
           <p className="mt-4">
-            Ik hou van structuur en consistentie — vandaar mijn voorliefde voor
-            design systems, herbruikbare componenten en heldere conventies. Ik
-            werk goed zelfstandig, maar voel me net zo thuis in een team: een
-            sociaal persoon en makkelijk in de omgang.
+            I love structure and consistency, hence my fondness for design
+            systems, reusable components and clear conventions. I work well on my
+            own, but feel just as at home in a team: sociable and easy to get
+            along with.
           </p>
 
           <p className="mt-4">
-            Benieuwd wat ik voor je kan betekenen?{` `}
+            Curious what I can do for you? Check out my resume below or send an inquiry to {` `}
             <a
               href="mailto:hello@svondervoort.nl"
               className="underline hover:no-underline"
@@ -158,16 +158,12 @@ export async function getStaticProps() {
     props: {
       timelineCollection,
       yearsOfExperience: yearsSinceFirstExperience(timelineCollection),
+      yearsOld: yearsSince(new Date(1988, 7, 20)),
     },
   };
 }
 
-function yearsSinceFirstExperience(timelineCollection) {
-  const startDates = timelineCollection
-    .filter(({ type, from }) => type === `Experience` && from != null)
-    .map(({ from }) => new Date(from));
-
-  const start = new Date(Math.min(...startDates));
+function yearsSince(start) {
   const now = new Date();
 
   let years = now.getFullYear() - start.getFullYear();
@@ -180,6 +176,14 @@ function yearsSinceFirstExperience(timelineCollection) {
   }
 
   return years;
+}
+
+function yearsSinceFirstExperience(timelineCollection) {
+  const startDates = timelineCollection
+    .filter(({ type, from }) => type === `Experience` && from != null)
+    .map(({ from }) => new Date(from));
+
+  return yearsSince(new Date(Math.min(...startDates)));
 }
 
 export default Home;
