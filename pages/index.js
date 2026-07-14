@@ -2,6 +2,7 @@ import { loadData } from "../lib/load-data";
 import Timeline from "../components/timeline";
 import { filters } from "../lib/filters";
 import Game from "../components/game";
+import Image from "next/image";
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -101,7 +102,21 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
 
         <Game />
 
-        <div className="mt-12 font-mono text-sm text-white md:text-base lg:mt-16">
+        {/* Too wide to centre on the timeline rail: at 200px the circle would hang
+            84px past the container's left edge and clip off-screen on mobile. So it
+            sits in the text column instead and the rail runs past it. */}
+        <div className="mt-12 h-[200px] w-[200px] overflow-hidden rounded-full border border-primary bg-black lg:mt-16">
+          <Image
+            src="/sander.jpg"
+            alt="Sander van de Vondervoort"
+            width={400}
+            height={400}
+            priority
+            className="h-full w-full object-cover"
+          />
+        </div>
+
+        <div className="mt-8 font-mono text-sm text-white md:text-base">
           <p>
             I&apos;m Sander van de Vondervoort. {yearsOld} years old, Frontend
             Developer, married 💍, father of 2 👧👦 and a gamer 👾.
