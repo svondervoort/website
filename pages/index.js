@@ -94,7 +94,7 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
         </div>
       </div>
       <div className="relative container mx-auto md:max-w-3xl py-8 lg:py-16 pl-16 lg:pl-24">
-        <h1 className="sr-only">SVONDERVOORT</h1>
+        <h1 className="sr-only">Sander van de Vondervoort</h1>
 
         {/* The timeline line stops at the game and picks up again below it, so it
             never crosses the card. */}
