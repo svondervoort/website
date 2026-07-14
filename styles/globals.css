@@ -8,14 +8,33 @@ body {
   }
 }
 
+/*
+ * The page's top offset (8rem, 12rem at lg) plus a bottom inset matching the header's
+ * own inset (2rem, 4rem at lg), so the hero card closes above the fold with an even
+ * margin rather than running its bottom border off the screen.
+ */
 .game-hero {
-  height: calc(100vh - 8rem);
-  height: calc(100dvh - 8rem);
+  height: calc(100vh - 10rem);
+  height: calc(100dvh - 10rem);
+}
+
+/*
+ * Where the timeline line resumes below the hero: the container's own top padding
+ * (2rem) plus the hero's height. Keep in step with .game-hero above.
+ */
+.timeline-line--below-hero {
+  top: calc(100vh - 8rem);
+  top: calc(100dvh - 8rem);
 }
 
 @media (min-width: 1024px) {
   .game-hero {
-    height: calc(100vh - 12rem);
-    height: calc(100dvh - 12rem);
+    height: calc(100vh - 16rem);
+    height: calc(100dvh - 16rem);
+  }
+
+  .timeline-line--below-hero {
+    top: calc(100vh - 12rem);
+    top: calc(100dvh - 12rem);
   }
 }

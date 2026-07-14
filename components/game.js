@@ -30,10 +30,12 @@ export default function Game() {
 
   return (
     <div className="game-hero relative -ml-16 lg:-ml-24">
-      <canvas
-        ref={canvasRef}
-        className="game-canvas absolute left-1/2 top-0 h-full w-screen -translate-x-1/2"
-      />
+      {/* Mirrors the header's geometry: the same inset, then the same centred container. */}
+      <div className="absolute left-1/2 top-0 h-full w-screen -translate-x-1/2 px-8 lg:px-16">
+        <div className="container mx-auto h-full overflow-hidden rounded-lg border border-dashed">
+          <canvas ref={canvasRef} className="game-canvas block h-full w-full" />
+        </div>
+      </div>
     </div>
   );
 }
