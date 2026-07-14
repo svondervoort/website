@@ -68,8 +68,10 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
                         value={name}
                         checked={checkedState[i]}
                         onChange={() => handleOnChange(i)}
-                        className={`appearance-none absolute top-2/4 lg:top-auto lg:bottom-0 left-6 lg:left-2/4 -translate-y-2/4 lg:-translate-y-0 lg:-translate-x-2/4 w-[14px] h-1 bg-white ${
-                          checkedState[i] ? "shadow-switch shadow-white" : ""
+                        className={`appearance-none absolute top-2/4 lg:top-auto lg:bottom-0 left-6 lg:left-2/4 -translate-y-2/4 lg:-translate-y-0 lg:-translate-x-2/4 w-[14px] h-1 ${
+                          checkedState[i]
+                            ? "bg-accent shadow-switch shadow-accent"
+                            : "bg-white"
                         }`}
                     />
                     <label className="block cursor-pointer leading-4 pl-16 lg:pl-8 pr-8 py-6 hover:bg-white/10" htmlFor={`custom-checkbox-${i}`}
