@@ -105,7 +105,7 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
         {/* Too wide to centre on the timeline rail: at 200px the circle would hang
             84px past the container's left edge and clip off-screen on mobile. So it
             sits in the text column instead and the rail runs past it. */}
-        <div className="mt-12 h-[200px] w-[200px] overflow-hidden rounded-full border border-primary bg-black lg:mt-16">
+        <div className="mt-12 h-[200px] w-[200px] overflow-hidden rounded-full border border-white/50 bg-black lg:mt-16">
           <Image
             src="/sander.jpg"
             alt="Sander van de Vondervoort"
