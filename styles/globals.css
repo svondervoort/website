@@ -15,7 +15,6 @@ body {
  */
 .game-hero {
   height: calc(100vh - 10rem);
-  height: calc(100dvh - 10rem);
 }
 
 /*
@@ -24,17 +23,14 @@ body {
  */
 .timeline-line--below-hero {
   top: calc(100vh - 8rem);
-  top: calc(100dvh - 8rem);
 }
 
 @media (min-width: 1024px) {
   .game-hero {
     height: calc(100vh - 16rem);
-    height: calc(100dvh - 16rem);
   }
 
   .timeline-line--below-hero {
     top: calc(100vh - 12rem);
-    top: calc(100dvh - 12rem);
   }
 }
