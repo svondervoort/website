@@ -7,6 +7,35 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLinkedin,
+  faGithub,
+  faCodepen,
+  faSteam,
+} from "@fortawesome/free-brands-svg-icons";
+
+const socialLinks = [
+  {
+    name: "LinkedIn",
+    href: "https://nl.linkedin.com/in/svondervoort",
+    icon: faLinkedin,
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/svondervoort",
+    icon: faGithub,
+  },
+  {
+    name: "CodePen",
+    href: "https://codepen.io/svondervoort/",
+    icon: faCodepen,
+  },
+  {
+    name: "Steam",
+    href: "https://steamcommunity.com/id/sander2/",
+    icon: faSteam,
+  },
+];
 
 function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
   const [checkedState, setCheckedState] = React.useState(
@@ -131,6 +160,22 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
               hello@svondervoort.nl
             </a>
           </p>
+
+          <ul className="mt-6 flex gap-6">
+            {socialLinks.map(({ name, href, icon }) => (
+              <li key={name}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                  className="text-white/70 transition-colors hover:text-white"
+                >
+                  <FontAwesomeIcon icon={icon} className="text-xl" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
