@@ -16,7 +16,7 @@ import {
 const socialLinks = [
   {
     name: "Mail",
-    href: "mailto:hello@svondervoort.net",
+    href: "mailto:hallo@svondervoort.net",
     icon: faEnvelope,
   },
   {
