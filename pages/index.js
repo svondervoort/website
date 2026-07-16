@@ -2,6 +2,7 @@ import { loadData } from "../lib/load-data";
 import Timeline from "../components/timeline";
 import { filters } from "../lib/filters";
 import Game from "../components/game";
+import Head from "next/head";
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -73,7 +74,16 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
   };
 
   return (
-    <main className="px-8 pt-24 lg:px-0 lg:pt-32">
+    <>
+      <Head>
+        <title>Sander van de Vondervoort — Frontend Developer</title>
+        <meta
+          name="description"
+          content={`Frontend Developer met ${yearsOfExperience} jaar ervaring in het omzetten van designs naar werkende, onderhoudbare frontends. Vooral met Craft CMS.`}
+        />
+      </Head>
+
+      <main className="px-8 pt-24 lg:px-0 lg:pt-32">
       <div className="fixed left-8 top-8 right-8 lg:left-16 lg:top-16 lg:right-16 z-50">
         <div className="relative container mx-auto backdrop-blur-2xl bg-white/50 rounded-lg pt-16 lg:pt-0 lg:px-16 min-h-[64px] lg:flex lg:justify-center">
           {/* Logo */}
@@ -184,7 +194,8 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
             )
         )}
       </div>
-    </main>
+      </main>
+    </>
   );
 }
 
