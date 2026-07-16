@@ -1,24 +1,25 @@
 export default function Timeline({ item, last }) {
-  const simpleView = [`Skill`, `Client`];
+  const isSimple = [`Skill`, `Client`].includes(item.type);
+  const isClient = item.type === `Client`;
 
   return (
     <div
-      className={`relative pl-16 lg:pl-24 text-sm before:absolute before:bottom-0 before:top-8 before:left-4 before:w-0.5 before:bg-white/50 md:text-base ${
+      className={`relative pl-16 lg:pl-24 text-sm before:absolute before:bottom-0 before:top-8 before:left-4 before:border-l md:text-base ${
         last ? `pb-40` : `pb-12`
+      } ${
+        !isSimple ? `pb-24 before:border-dashed before:border-white/25` : `before:border-white`
       }`}
     >
       <div
-        className={`absolute left-0 top-0 h-8 w-8 rounded-full border ${
-          !simpleView.includes(item.type) ? `border-solid` : `border-dashed`
-        } align-center flex justify-center border-primary bg-black`}
+        className={`absolute left-0 top-0 h-8 w-8 rounded-full border align-center flex justify-center border-primary bg-black`}
       ></div>
-      <div className={` ${
-          simpleView.includes(item.type) ? "opacity-50 lg:pr-48" : ""
+      <div className={` ${isSimple ? "lg:pr-48" : ""} ${
+          isClient ? "opacity-50" : ""
       }`}>
         <div className="flex flex-col items-start justify-between font-mono md:flex-row md:items-center">
           <h2
             className={`leading-8 ${
-              !simpleView.includes(item.type)
+              !isSimple
                 ? `mb-2 text-xl text-white md:mb-0 md:text-3xl`
                 : `text-white`
             }`}
@@ -26,18 +27,18 @@ export default function Timeline({ item, last }) {
             {item.title}
           </h2>
 
-          {item.rating != null && (
+          {item.rating != null && !isSimple && (
             <span className="text-white">{item.rating}%</span>
           )}
 
-          {item.from != null && !simpleView.includes(item.type) && (
+          {item.from != null && !isSimple && (
             <div className="flex rounded border border-solid border-white">
               <span className="px-4 py-2">
                 {formatDate(item.from)}
               </span>
 
               <span className="bg-white px-4 py-2 text-green-500">
-                {item.till != null ? formatDate(item.till) : `Today`}
+                {item.till != null ? formatDate(item.till) : `Heden`}
               </span>
             </div>
           )}
@@ -59,7 +60,7 @@ export default function Timeline({ item, last }) {
           </div>
         )}
 
-        {item.rating != null && (
+        {item.rating != null && !isSimple && (
           <div className="mt-2 w-full rounded-full border border-solid border-white md:mt-4">
             <div
               className="h-2.5 rounded-full bg-white"

@@ -5,8 +5,7 @@ import Game from "../components/game";
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faTimes, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
   faLinkedin,
   faGithub,
@@ -15,6 +14,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const socialLinks = [
+  {
+    name: "Mail",
+    href: "mailto:hello@svondervoort.net",
+    icon: faEnvelope,
+  },
   {
     name: "LinkedIn",
     href: "https://nl.linkedin.com/in/svondervoort",
@@ -134,31 +138,20 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
 
         <div className="mt-12 font-mono text-sm text-white md:text-base lg:mt-16">
           <p>
-            I&apos;m Sander van de Vondervoort. {yearsOld} years old, Frontend
-            Developer, married 💍, father of 2 👧👦 and a gamer 👾.
+            Hoi, ik ben Sander van de Vondervoort. {yearsOld} jaar oud. Ik ben Frontend
+            Developer 💻, getrouwd 💍, vader van 2 👧👦 en gamer 👾.
           </p>
 
           <p className="mt-4">
-            For {yearsOfExperience} years I&apos;ve been turning designs into
-            working, maintainable frontends: from component architecture and Twig
-            templates to CSS and JavaScript, mostly within Craft CMS.
+            Al {yearsOfExperience} jaar zet ik designs om naar werkende, onderhoudbare frontends. Van componenten architectuur en Twig tot (S)CSS en Javascript, de laatste jaren vooral met Craft CMS.
           </p>
 
           <p className="mt-4">
-            I love structure and consistency, hence my fondness for design
-            systems, reusable components and clear conventions. I work well on my
-            own, but feel just as at home in a team: sociable and easy to get
-            along with.
+            Ik hou van structuur en consistentie. Ik werk goed zelfstandig, maar voel me ook thuis in een team. Ik ben sociaal en makkelijk in de omgang. Mede daardoor heb ik ook veel direct contact met klanten om de lijntjes zo kort mogelijk te houden.
           </p>
 
           <p className="mt-4">
-            Curious what I can do for you? Check out my resume below or send an inquiry to {` `}
-            <a
-              href="mailto:hello@svondervoort.nl"
-              className="underline hover:no-underline"
-            >
-              hello@svondervoort.nl
-            </a>
+            Benieuwd wat ik voor jou kan betekenen? Bekijk mijn CV hieronder of neem contact met me op via:
           </p>
 
           <ul className="mt-6 flex gap-6">
