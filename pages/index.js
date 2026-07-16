@@ -44,11 +44,11 @@ const socialLinks = [
 
 function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
   const [checkedState, setCheckedState] = React.useState(
-    new Array(filters.length).fill(true)
+    filters.map(({ defaultActive }) => defaultActive)
   );
   const [showFilters, setShowFilters] = React.useState(false);
   const [activeFilters, setActiveFilters] = React.useState(
-    filters.map(({ type }) => type)
+    filters.filter(({ defaultActive }) => defaultActive).map(({ type }) => type)
   );
 
   const toggleFilters = () => {
