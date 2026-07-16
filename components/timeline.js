@@ -1,6 +1,11 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { iconForType } from "../lib/filters";
+import { PLACEHOLDER_TYPE } from "../lib/placeholder";
+
 export default function Timeline({ item, last }) {
-  const isSimple = [`Skill`, `Client`].includes(item.type);
-  const isClient = item.type === `Client`;
+  const isSimple = [`Skill`, `Client`, PLACEHOLDER_TYPE].includes(item.type);
+  const isMuted = [`Client`, PLACEHOLDER_TYPE].includes(item.type);
+  const icon = iconForType(item.type);
 
   return (
     <div
@@ -10,11 +15,13 @@ export default function Timeline({ item, last }) {
         !isSimple ? `pb-24 before:border-dashed before:border-white/25` : `before:border-white`
       }`}
     >
-      <div
-        className={`absolute left-0 top-0 h-8 w-8 rounded-full border align-center flex justify-center border-primary bg-black`}
-      ></div>
+      <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-white">
+        {icon != null && (
+          <FontAwesomeIcon icon={icon} className="text-xs text-white/50" />
+        )}
+      </div>
       <div className={` ${isSimple ? "lg:pr-48" : ""} ${
-          isClient ? "opacity-50" : ""
+          isMuted ? "opacity-50" : ""
       }`}>
         <div className="flex flex-col items-start justify-between font-mono md:flex-row md:items-center">
           <h2

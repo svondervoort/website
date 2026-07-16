@@ -1,5 +1,6 @@
 import { loadData } from "../lib/load-data";
 import Timeline from "../components/timeline";
+import { nextClientPlaceholder } from "../lib/placeholder";
 import { filters } from "../lib/filters";
 import Game from "../components/game";
 import React from "react";
@@ -89,7 +90,7 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
             <ul className={`flex-col lg:flex-row divide-y lg:divide-x divide-green-500/20 border-x border-green-500/20 lg:flex ${
                 showFilters ? "flex" : "hidden"
             }`}>
-              {filters.map(({ name }, i) => (
+              {filters.map(({ name, icon }, i) => (
                   <li key={`custom-checkbox-${i}`} className={`relative ${
                             checkedState[i] ? "" : "opacity-20"
                         }`}>
@@ -102,12 +103,13 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
                         onChange={() => handleOnChange(i)}
                         className={`appearance-none absolute top-2/4 lg:top-auto lg:bottom-0 left-6 lg:left-2/4 -translate-y-2/4 lg:-translate-y-0 lg:-translate-x-2/4 w-[14px] h-1 ${
                           checkedState[i]
-                            ? "bg-accent shadow-switch shadow-accent"
+                            ? "bg-white shadow-switch shadow-white"
                             : "bg-white"
                         }`}
                     />
-                    <label className="block cursor-pointer leading-4 pl-16 lg:pl-8 pr-8 py-6 hover:bg-white/10" htmlFor={`custom-checkbox-${i}`}
+                    <label className="flex items-center gap-3 cursor-pointer leading-4 pl-16 lg:pl-8 pr-8 py-6 hover:bg-white/10" htmlFor={`custom-checkbox-${i}`}
                     >
+                      <FontAwesomeIcon icon={icon} className="text-white/50" />
                       {name}
                     </label>
                   </li>
@@ -173,6 +175,12 @@ function Home({ timelineCollection, yearsOfExperience, yearsOld }) {
       </div>
 
       <div className="container mx-auto max-w-3xl">
+        {/* Caps the top of the rail regardless of which types are shown, but
+            there's nothing to head up once every filter is off. */}
+        {activeFilters.length > 0 && (
+          <Timeline item={nextClientPlaceholder}></Timeline>
+        )}
+
         {timelineCollection.map(
           (item, i, timelineCollection) =>
             activeFilters.includes(item.type) && (
